@@ -50,12 +50,15 @@ void HomeWork1App::drawRectangles(uint8_t* pixels, int x1, int y1, int rect_widt
 	c.b = fill.b;
 	c.g = fill.g;
 
+	
+
 	for(int x = x1; x<rect_height; x++){
 		for(int y = y1; y<rect_width; y++){
 	pixels[3*(x + y*kTextureSize)] = c.r;
 	pixels[3*(x + y*kTextureSize)+1] = c.g;
 	pixels[3*(x + y*kTextureSize)+2] = c.b;
 		}
+
 	}
 }
 
@@ -70,16 +73,24 @@ void HomeWork1App::setup()
 
 void HomeWork1App::mouseDown( MouseEvent event )
 {
-}
 
-void HomeWork1App::update()
-{
 	//Get our array of pixel information
 	uint8_t* dataArray = (*mySurface_).getData();
 
 	Color8u fill1 = Color8u(125,198,122);
+
+	int xValue = (rand() % 400 + 1);
+	int yValue = (rand() % 400 + 1);
+	int width = (rand() % 400 + 200);
+	int height = (rand() % 400 + 200);
 	
-	drawRectangles(dataArray,100,100,200,300, fill1);
+	drawRectangles(dataArray,xValue,yValue,width,height, fill1);
+	
+}
+
+void HomeWork1App::update()
+{
+
 
 	
 
