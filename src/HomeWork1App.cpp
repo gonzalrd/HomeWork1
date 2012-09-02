@@ -77,9 +77,9 @@ void HomeWork1App::update()
 	//Get our array of pixel information
 	uint8_t* dataArray = (*mySurface_).getData();
 
-	Color8u fill1 = Color8u(0,138,122);
+	Color8u fill1 = Color8u(125,198,122);
 	
-	drawRectangles(dataArray,(frame_number_%14), (frame_number_%14),200,300, fill1);
+	drawRectangles(dataArray,100,100,200,300, fill1);
 
 	
 
