@@ -74,6 +74,12 @@ void HomeWork1App::setup()
 void HomeWork1App::mouseDown( MouseEvent event )
 {
 
+	
+}
+
+void HomeWork1App::update()
+{
+	
 	//Get our array of pixel information
 	uint8_t* dataArray = (*mySurface_).getData();
 
@@ -85,16 +91,10 @@ void HomeWork1App::mouseDown( MouseEvent event )
 
 	int xValue = (rand() % 400 + 50);
 	int yValue = (rand() % 400 + 50);
-	int width = (rand() % 400 + 200);
-	int height = (rand() % 400 + 200);
+	int width = (rand() % 600 + 200);
+	int height = (rand() % 600 + 200);
 	
 	drawRectangles(dataArray,xValue,yValue,width,height, fill1);
-	
-}
-
-void HomeWork1App::update()
-{
-
 
 	
 
