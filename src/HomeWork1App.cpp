@@ -77,10 +77,14 @@ void HomeWork1App::mouseDown( MouseEvent event )
 	//Get our array of pixel information
 	uint8_t* dataArray = (*mySurface_).getData();
 
-	Color8u fill1 = Color8u(125,198,122);
+	int red = (rand() % 200 + 50);
+	int blue = (rand() % 200 + 50);
+	int green = (rand() % 200 + 50);
 
-	int xValue = (rand() % 400 + 1);
-	int yValue = (rand() % 400 + 1);
+	Color8u fill1 = Color8u(red,green,blue);
+
+	int xValue = (rand() % 400 + 50);
+	int yValue = (rand() % 400 + 50);
 	int width = (rand() % 400 + 200);
 	int height = (rand() % 400 + 200);
 	
