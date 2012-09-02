@@ -36,6 +36,7 @@ class HomeWork1App : public AppBasic {
 	/** This satisfies the "rectangle" requirement, goal A.1
 	 */
 	void drawRectangles(uint8_t* pixels, int x1, int y1,  int rect_width, int rect_height, Color8u fill);
+	void drawCircle(uint8_t* pixels, int center_x, int center_y, int r, Color8u c);
 };
 
 void HomeWork1App::prepareSettings(Settings* settings){
@@ -43,14 +44,13 @@ void HomeWork1App::prepareSettings(Settings* settings){
 	(*settings).setResizable(false);
 }
 
+//Draws the rectangles for the rectangle requirment.
 void HomeWork1App::drawRectangles(uint8_t* pixels, int x1, int y1, int rect_width, int rect_height, Color8u fill){
 
 	Color8u c = Color8u(192,123,0);
 	c.r = fill.r;
 	c.b = fill.b;
 	c.g = fill.g;
-
-	
 
 	for(int x = x1; x<rect_height; x++){
 		for(int y = y1; y<rect_width; y++){
@@ -59,6 +59,25 @@ void HomeWork1App::drawRectangles(uint8_t* pixels, int x1, int y1, int rect_widt
 	pixels[3*(x + y*kTextureSize)+2] = c.b;
 		}
 
+	}
+}
+
+void HomeWork1App::drawCircle(uint8_t* pixels, int center_x, int center_y, int r, Color8u c){
+	for(int y=center_y-r; y<=center_y+r; y++){
+		for(int x=center_x-r; x<=center_x+r; x++){
+			//Bounds test, to make sure we don't access array out of bounds
+			if(y < 0 || x < 0 || x >= kAppWidth || y >= kAppHeight) continue;
+		
+			
+			int dist = (int)sqrt((double)((x-center_x)*(x-center_x) + (y-center_y)*(y-center_y)));
+			if(dist <= r){
+					 
+					pixels[3*(x + y*kTextureSize)] =  c.r;
+					pixels[3*(x + y*kTextureSize)+1] = c.g;
+					pixels[3*(x + y*kTextureSize)+2] =  c.b;
+				
+			}
+		}
 	}
 }
 
@@ -83,22 +102,30 @@ void HomeWork1App::update()
 	//Get our array of pixel information
 	uint8_t* dataArray = (*mySurface_).getData();
 
+	//creates the random colors for each rectangle on the screen.
 	int red = (rand() % 200 + 50);
 	int blue = (rand() % 200 + 50);
 	int green = (rand() % 200 + 50);
 
 	Color8u fill1 = Color8u(red,green,blue);
+	Color8u c = Color8u(0,10,220);
 
+	//creates random dimension for each rectangle.
 	int xValue = (rand() % 400 + 50);
 	int yValue = (rand() % 400 + 50);
 	int width = (rand() % 600 + 200);
 	int height = (rand() % 600 + 200);
 	
+	//draws the rectangles.
 	drawRectangles(dataArray,xValue,yValue,width,height, fill1);
 
 	
+	drawCircle(dataArray, 200, 200, 10, c);
+		
+	
+	
 
-		//Only save the first frame of drawing as output
+ //Only save the first frame of drawing as output
 	if(frame_number_ == 0){
 		writeImage("raquelImage.png",*mySurface_);
 		//We do this here, instead of setup, because we don't want to count the writeImage time in our estimate
