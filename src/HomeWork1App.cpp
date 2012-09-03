@@ -88,8 +88,9 @@ void HomeWork1App::setup()
 		
    //This is the setup that everyone needs to do
 	mySurface_ = new Surface(kTextureSize,kTextureSize,false);
-	circleColor = Color8u(0,10,255);
-	
+
+	//Set up for the gradient in the circles requiremnt A4
+	circleColor = Color8u(132,10,10);
 }
 
 void HomeWork1App::mouseDown( MouseEvent event )
@@ -112,22 +113,21 @@ void HomeWork1App::update()
 	Color8u fill1 = Color8u(red,green,blue);
 
 	//creates random dimension for each rectangle.
-	int xValue = (rand() % 200 + 50);
-	int yValue = (rand() % 200 + 50);
-	int width = (rand() % 500 + 200);
-	int height = (rand() % 500 + 200);
+	int xValue = (rand() % 400 + 90);
+	int yValue = (rand() % 400 + 90);
+	int width = (rand() % 400 + 100);
+	int height = (rand() % 400 + 100);
 	
 	//draws the rectangles.
 	drawRectangles(dataArray,xValue,yValue,width,height, fill1);
 	
-	//Fullfils the gradient requirment inside the circles.
+//Fulfills the gradient requirment A4 inside the circles.
 //Variable initialization needed to create the gradient circle
 
-
 	//Draws a row of circles.
-	int x = 0;
-	while(x<800){
-
+	int circleX = 10;
+	while(circleX<800){
+	//Satisfies requirment gradient requirement A4
 	if(circleColor.r<255) circleColor.r = circleColor.r + 10;
 	if(circleColor.r>255) circleColor.r = circleColor.r - 10;
 	if(circleColor.b<255) circleColor.b = circleColor.b + 10;
@@ -135,8 +135,8 @@ void HomeWork1App::update()
 	if(circleColor.g<255) circleColor.g = circleColor.g + 10;
 	if(circleColor.g>255) circleColor.g = circleColor.g - 10;
 
-	drawCircle(dataArray, x, 20, 10, circleColor);
-	x = x+40;
+	drawCircle(dataArray, circleX, 20, 10, circleColor);
+	circleX = circleX + 40;
 		}
 	
 	
