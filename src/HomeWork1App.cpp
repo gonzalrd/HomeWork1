@@ -145,6 +145,7 @@ void HomeWork1App::mouseDown( MouseEvent event )
 {
 	//Get our array of pixel information
 	uint8_t* dataArray = (*mySurface_).getData();
+	tint(dataArray);
 	blur(dataArray);
 	
 }
