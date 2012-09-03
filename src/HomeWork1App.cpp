@@ -119,9 +119,11 @@ void HomeWork1App::update()
 	//draws the rectangles.
 	drawRectangles(dataArray,xValue,yValue,width,height, fill1);
 
-	
-	drawCircle(dataArray, 200, 200, 10, c);
-		
+	for(int x = 10; x<800; x++){
+		if(x % 40 ==0){
+	drawCircle(dataArray, x, 20, 10, c);
+		}
+	}
 	
 	
 
