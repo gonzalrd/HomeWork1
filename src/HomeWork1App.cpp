@@ -37,7 +37,16 @@ class HomeWork1App : public AppBasic {
 	/** This satisfies the "rectangle" requirement, goal A.1
 	 */
 	void drawRectangles(uint8_t* pixels, int x1, int y1,  int rect_width, int rect_height, Color8u fill);
+	/** Satisfies the circle requiremtn goal A.2 
+	*/
 	void drawCircle(uint8_t* pixels, int center_x, int center_y, int r, Color8u c);
+	/**Satifies the tint requirement goal A.6 
+	*/
+	void tint(uint8_t* pixels);
+
+	/**Satifies the blur requirment goal B.1
+	**/
+	void blur(uint8_t* pixels);
 
 };
 
@@ -81,6 +90,45 @@ void HomeWork1App::drawCircle(uint8_t* pixels, int center_x, int center_y, int r
 		}
 	}
 }
+//Takes in the array of pixels and sets the blue color in each one to change the color
+void HomeWork1App::tint(uint8_t* pixels){
+
+	Color8u c = Color8u(0,100,0);
+	for(int col = 0; col<800; col++){
+		for(int row = 0;  row<600; row++){
+			pixels[3*(col + row*kTextureSize)+1] = c.b;
+		}
+	}
+}
+
+void HomeWork1App::blur(uint8_t* pixels){
+
+	
+	for(int col = 0; col<800; col++){
+		for(int row = 0;  row<600; row++){
+			if(col < 792){
+				for(int n = 0; n<8; n++){
+					pixels[3*(col + row*kTextureSize)] = pixels[3*(col + row*kTextureSize)] + pixels[3*((col+n) + row*kTextureSize)];
+					pixels[3*(col + row*kTextureSize)+1] = pixels[3*(col + row*kTextureSize)+1] + pixels[3*((col+n)  + row*kTextureSize)+1];
+					pixels[3*(col + row*kTextureSize)+2] =  pixels[3*(col + row*kTextureSize)+2] + pixels[3*((col+n) + row*kTextureSize)+2];
+				}
+				}
+
+				if(col>792){
+				for(int n = 8; n>0; n--){
+					pixels[3*(col + row*kTextureSize)] = pixels[3*(col + row*kTextureSize)] + pixels[3*((col-n) + row*kTextureSize)];
+					pixels[3*(col + row*kTextureSize)+1] = pixels[3*(col + row*kTextureSize)+1] + pixels[3*((col-n)  + row*kTextureSize)+1];
+					pixels[3*(col + row*kTextureSize)+2] =  pixels[3*(col + row*kTextureSize)+2] + pixels[3*((col-n) + row*kTextureSize)+2];
+				}
+				
+			}
+				    pixels[3*(col + row*kTextureSize)] =  pixels[3*(col + row*kTextureSize)]/8;
+					pixels[3*(col + row*kTextureSize)+1] = pixels[3*(col + row*kTextureSize)]/8;
+					pixels[3*(col + row*kTextureSize)+2] =  pixels[3*(col + row*kTextureSize)+2]/8;
+
+		}
+	}
+}
 
 void HomeWork1App::setup()
 {
@@ -95,7 +143,9 @@ void HomeWork1App::setup()
 
 void HomeWork1App::mouseDown( MouseEvent event )
 {
-
+	//Get our array of pixel information
+	uint8_t* dataArray = (*mySurface_).getData();
+	blur(dataArray);
 	
 }
 
