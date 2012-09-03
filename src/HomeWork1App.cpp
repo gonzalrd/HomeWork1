@@ -20,6 +20,7 @@ class HomeWork1App : public AppBasic {
 	void update();
 	void draw();
 	void prepareSettings(Settings* settings);
+	Color8u circleColor;
 	
   private:
 	Surface* mySurface_; //The Surface object whose pixel array we will modify
@@ -37,6 +38,7 @@ class HomeWork1App : public AppBasic {
 	 */
 	void drawRectangles(uint8_t* pixels, int x1, int y1,  int rect_width, int rect_height, Color8u fill);
 	void drawCircle(uint8_t* pixels, int center_x, int center_y, int r, Color8u c);
+
 };
 
 void HomeWork1App::prepareSettings(Settings* settings){
@@ -67,13 +69,13 @@ void HomeWork1App::drawCircle(uint8_t* pixels, int center_x, int center_y, int r
 		for(int x=center_x-r; x<=center_x+r; x++){
 			//Bounds test, to make sure we don't access array out of bounds
 			if(y < 0 || x < 0 || x >= kAppWidth || y >= kAppHeight) continue;
-		
-			
+
+					
 			int dist = (int)sqrt((double)((x-center_x)*(x-center_x) + (y-center_y)*(y-center_y)));
 			if(dist <= r){
 					pixels[3*(x + y*kTextureSize)] =  c.r;
-					pixels[3*(x + y*kTextureSize)+1] = c.g;
-					pixels[3*(x + y*kTextureSize)+2] =  c.b;
+					pixels[3*(x + y*kTextureSize)+1] = c.b;
+					pixels[3*(x + y*kTextureSize)+2] =  c.g;
 				
 			}
 		}
@@ -86,6 +88,7 @@ void HomeWork1App::setup()
 		
    //This is the setup that everyone needs to do
 	mySurface_ = new Surface(kTextureSize,kTextureSize,false);
+	circleColor = Color8u(0,10,255);
 	
 }
 
@@ -109,40 +112,29 @@ void HomeWork1App::update()
 	Color8u fill1 = Color8u(red,green,blue);
 
 	//creates random dimension for each rectangle.
-	int xValue = (rand() % 400 + 50);
-	int yValue = (rand() % 400 + 50);
-	int width = (rand() % 600 + 200);
-	int height = (rand() % 600 + 200);
+	int xValue = (rand() % 200 + 50);
+	int yValue = (rand() % 200 + 50);
+	int width = (rand() % 500 + 200);
+	int height = (rand() % 500 + 200);
 	
 	//draws the rectangles.
 	drawRectangles(dataArray,xValue,yValue,width,height, fill1);
-
-
-	//Variable initialization needed to create the gradient circles
-	Color8u circleColor = Color8u(0,10,220);
-
-	//Fullfils the gradient requirment inside the circles.
 	
-	if(circleColor.r<255) circleColor.r = circleColor.r + 10;
-	if(circleColor.r>255) circleColor.r = circleColor.r - 10;
-	if(circleColor.b<255) circleColor.r = circleColor.b + 10;
-	if(circleColor.b>255) circleColor.r = circleColor.b - 10;
-	if(circleColor.g<255) circleColor.g = circleColor.g + 10;
-	if(circleColor.g>255) circleColor.g = circleColor.g - 10;
+	//Fullfils the gradient requirment inside the circles.
+//Variable initialization needed to create the gradient circle
 
 
 	//Draws a row of circles.
 	int x = 0;
 	while(x<800){
-		
-	//Fullfils the gradient requirment inside the circles.
-	
+
 	if(circleColor.r<255) circleColor.r = circleColor.r + 10;
 	if(circleColor.r>255) circleColor.r = circleColor.r - 10;
-	if(circleColor.b<255) circleColor.r = circleColor.b + 10;
-	if(circleColor.b>255) circleColor.r = circleColor.b - 10;
+	if(circleColor.b<255) circleColor.b = circleColor.b + 10;
+	if(circleColor.b>255) circleColor.b = circleColor.b - 10;
 	if(circleColor.g<255) circleColor.g = circleColor.g + 10;
 	if(circleColor.g>255) circleColor.g = circleColor.g - 10;
+
 	drawCircle(dataArray, x, 20, 10, circleColor);
 	x = x+40;
 		}
