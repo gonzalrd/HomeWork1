@@ -71,7 +71,6 @@ void HomeWork1App::drawCircle(uint8_t* pixels, int center_x, int center_y, int r
 			
 			int dist = (int)sqrt((double)((x-center_x)*(x-center_x) + (y-center_y)*(y-center_y)));
 			if(dist <= r){
-					 
 					pixels[3*(x + y*kTextureSize)] =  c.r;
 					pixels[3*(x + y*kTextureSize)+1] = c.g;
 					pixels[3*(x + y*kTextureSize)+2] =  c.b;
@@ -108,7 +107,6 @@ void HomeWork1App::update()
 	int green = (rand() % 200 + 50);
 
 	Color8u fill1 = Color8u(red,green,blue);
-	Color8u c = Color8u(0,10,220);
 
 	//creates random dimension for each rectangle.
 	int xValue = (rand() % 400 + 50);
@@ -119,11 +117,36 @@ void HomeWork1App::update()
 	//draws the rectangles.
 	drawRectangles(dataArray,xValue,yValue,width,height, fill1);
 
-	for(int x = 10; x<800; x++){
-		if(x % 40 ==0){
-	drawCircle(dataArray, x, 20, 10, c);
+
+	//Variable initialization needed to create the gradient circles
+	Color8u circleColor = Color8u(0,10,220);
+
+	//Fullfils the gradient requirment inside the circles.
+	
+	if(circleColor.r<255) circleColor.r = circleColor.r + 10;
+	if(circleColor.r>255) circleColor.r = circleColor.r - 10;
+	if(circleColor.b<255) circleColor.r = circleColor.b + 10;
+	if(circleColor.b>255) circleColor.r = circleColor.b - 10;
+	if(circleColor.g<255) circleColor.g = circleColor.g + 10;
+	if(circleColor.g>255) circleColor.g = circleColor.g - 10;
+
+
+	//Draws a row of circles.
+	int x = 0;
+	while(x<800){
+		
+	//Fullfils the gradient requirment inside the circles.
+	
+	if(circleColor.r<255) circleColor.r = circleColor.r + 10;
+	if(circleColor.r>255) circleColor.r = circleColor.r - 10;
+	if(circleColor.b<255) circleColor.r = circleColor.b + 10;
+	if(circleColor.b>255) circleColor.r = circleColor.b - 10;
+	if(circleColor.g<255) circleColor.g = circleColor.g + 10;
+	if(circleColor.g>255) circleColor.g = circleColor.g - 10;
+	drawCircle(dataArray, x, 20, 10, circleColor);
+	x = x+40;
 		}
-	}
+	
 	
 	
 
