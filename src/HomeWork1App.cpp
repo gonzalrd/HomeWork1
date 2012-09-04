@@ -149,7 +149,7 @@ void HomeWork1App::blur(uint8_t* pixels){
 				
 			}
 				    pixels[3*(col + row*kTextureSize)] =  pixels[3*(col + row*kTextureSize)]/9;
-					//pixels[3*(col + row*kTextureSize)+1] = pixels[3*(col + row*kTextureSize)+1]/9;
+					pixels[3*(col + row*kTextureSize)+1] = pixels[3*(col + row*kTextureSize)+1]/9;
 					//pixels[3*(col + row*kTextureSize)+2] =  pixels[3*(col + row*kTextureSize)+2]/9;
 
 		}
