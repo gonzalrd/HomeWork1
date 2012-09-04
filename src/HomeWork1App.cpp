@@ -157,7 +157,6 @@ void HomeWork1App::mouseDown( MouseEvent event )
 {
 	//Get our array of pixel information
 	uint8_t* dataArray = (*mySurface_).getData();
-	//tint(dataArray);
 	blur(dataArray);
 	
 }
@@ -167,6 +166,9 @@ void HomeWork1App::update()
 	
 	//Get our array of pixel information
 	uint8_t* dataArray = (*mySurface_).getData();
+
+	//Tints the background and every rectangle after they pop-up. So they flash another color and then tint a purplish blue.
+	tint(dataArray);
 
 	//creates the random colors for each rectangle on the screen.
 	int red = (rand() % 200 + 50);
