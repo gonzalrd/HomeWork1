@@ -205,10 +205,18 @@ void HomeWork1App::update()
 
 	//Draws a row of circles.
 	int circleX = 10;
+	int circleY = 60;
 	while(circleX<800){
 	createGradient();
 	drawCircle(dataArray, circleX, 20, 10, gradColor);
+	drawCircle(dataArray, circleX, 570, 10, gradColor);
 	circleX = circleX + 40;
+		}
+	while(circleY<560){
+	createGradient();
+	drawCircle(dataArray, 10, circleY, 10, gradColor);
+	drawCircle(dataArray, 770, circleY, 10, gradColor);
+	circleY = circleY + 40;
 		}
 	
 	
