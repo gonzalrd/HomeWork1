@@ -117,34 +117,13 @@ void HomeWork1App::tint(uint8_t* pixels){
 
 void HomeWork1App::blur(uint8_t* pixels){
 	for(int col = 2; col<799; col++){
-		for(int row = 2;  row<579; row++){
+		for(int row = 2;  row<599; row++){
 
-			//First eight in a row need to be handled differently
-			//if(col<9){
-				//for(int n = 0; n<8; n++){
-					//pixels[3*(col + row*kTextureSize)] = pixels[3*(col + row*kTextureSize)] + pixels[3*((col+n) + row*kTextureSize)] + pixels[3*((col+n) + (row+n)*kTextureSize)] + pixels[3*((col) + (row+n)*kTextureSize)] + pixels[3*((col-n) + (row+n)*kTextureSize)] + pixels[3*((col-n) + (row-n)*kTextureSize)] + pixels[3*((col) + (row-n)*kTextureSize)];
-					//pixels[3*(col + row*kTextureSize)+1] = pixels[3*(col + row*kTextureSize)+1] + pixels[3*((col+n)  + row*kTextureSize)+1];
-					//pixels[3*(col + row*kTextureSize)+2] =  pixels[3*(col + row*kTextureSize)+2] + pixels[3*((col+n) + row*kTextureSize)+2];
-				//}
-				
-			//}
-
-			
 				pixels[3*(col + row*kTextureSize)] = (pixels[3*(col + row*kTextureSize)] + pixels[3*((col+1) + row*kTextureSize)] + pixels[3*((col+1) + (row+1)*kTextureSize)] + pixels[3*((col) + (row+1)*kTextureSize)] + pixels[3*((col-1) + (row+1)*kTextureSize)] + pixels[3*((col-1) + (row-1)*kTextureSize)] + pixels[3*((col) + (row-1)*kTextureSize)])/9;
+				pixels[3*(col + row*kTextureSize)+1] = (pixels[3*(col + row*kTextureSize)+1] + pixels[3*((col+1) + row*kTextureSize)+1] + pixels[3*((col+1) + (row+1)*kTextureSize)+1] + pixels[3*((col) + (row+1)*kTextureSize)+1] + pixels[3*((col-1) + (row+1)*kTextureSize)+1] + pixels[3*((col-1) + (row-1)*kTextureSize)+1] + pixels[3*((col) + (row-1)*kTextureSize)+1])/9;
+				pixels[3*(col + row*kTextureSize)+2] = (pixels[3*(col + row*kTextureSize)+2] + pixels[3*((col+1) + row*kTextureSize)+2] + pixels[3*((col+1) + (row+1)*kTextureSize)+2] + pixels[3*((col) + (row+1)*kTextureSize)+2] + pixels[3*((col-1) + (row+1)*kTextureSize)+2] + pixels[3*((col-1) + (row-1)*kTextureSize)+2] + pixels[3*((col) + (row-1)*kTextureSize)+2])/9;
 					
-		
-			//Last eight pixels in a row need to be handled differently
-				//if(col>792){
-				//for(int n = 8; n>0; n--){
-					//pixels[3*(col + row*kTextureSize)] = pixels[3*(col + row*kTextureSize)] + pixels[3*((col-n) + row*kTextureSize)];
-					//pixels[3*(col + row*kTextureSize)+1] = pixels[3*(col + row*kTextureSize)+1] + pixels[3*((col-n)  + row*kTextureSize)+1];
-					//pixels[3*(col + row*kTextureSize)+2] =  pixels[3*(col + row*kTextureSize)+2] + pixels[3*((col-n) + row*kTextureSize)+2];
-				//}
-				
-				    //pixels[3*(col + row*kTextureSize)] =  pixels[3*(col + row*kTextureSize)]/9;
-					//pixels[3*(col + row*kTextureSize)+1] = pixels[3*(col + row*kTextureSize)+1]/9;
-					//pixels[3*(col + row*kTextureSize)+2] =  pixels[3*(col + row*kTextureSize)+2]/9;
-
+	
 		}
 	}
 }
