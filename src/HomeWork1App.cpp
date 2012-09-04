@@ -20,7 +20,7 @@ class HomeWork1App : public AppBasic {
 	void update();
 	void draw();
 	void prepareSettings(Settings* settings);
-	Color8u circleColor;
+	Color8u gradColor;
 	
   private:
 	Surface* mySurface_; //The Surface object whose pixel array we will modify
@@ -40,6 +40,10 @@ class HomeWork1App : public AppBasic {
 	/** Satisfies the circle requiremtn goal A.2 
 	*/
 	void drawCircle(uint8_t* pixels, int center_x, int center_y, int r, Color8u c);
+	/*Satifies the gradient requiremnt goal A.4
+	*/
+	void createGradient();
+
 	/**Satifies the tint requirement goal A.6 
 	*/
 	void tint(uint8_t* pixels);
@@ -89,6 +93,16 @@ void HomeWork1App::drawCircle(uint8_t* pixels, int center_x, int center_y, int r
 			}
 		}
 	}
+}
+
+void HomeWork1App::createGradient(){
+		//Satisfies requirment gradient requirement A4
+	if(gradColor.r<255) gradColor.r = gradColor.r + 10;
+	if(gradColor.r>255) gradColor.r = gradColor.r - 10;
+	if(gradColor.b<255) gradColor.b = gradColor.b + 10;
+	if(gradColor.b>255) gradColor.b = gradColor.b - 10;
+	if(gradColor.g<255) gradColor.g = gradColor.g + 10;
+	if(gradColor.g>255) gradColor.g = gradColor.g - 10;
 }
 //Takes in the array of pixels and sets the blue color in each one to change the color
 void HomeWork1App::tint(uint8_t* pixels){
@@ -150,7 +164,7 @@ void HomeWork1App::setup()
 	mySurface_ = new Surface(kTextureSize,kTextureSize,false);
 
 	//Set up for the gradient in the circles requiremnt A4
-	circleColor = Color8u(132,10,10);
+	gradColor = Color8u(132,10,10);
 }
 
 void HomeWork1App::mouseDown( MouseEvent event )
@@ -192,15 +206,8 @@ void HomeWork1App::update()
 	//Draws a row of circles.
 	int circleX = 10;
 	while(circleX<800){
-	//Satisfies requirment gradient requirement A4
-	if(circleColor.r<255) circleColor.r = circleColor.r + 10;
-	if(circleColor.r>255) circleColor.r = circleColor.r - 10;
-	if(circleColor.b<255) circleColor.b = circleColor.b + 10;
-	if(circleColor.b>255) circleColor.b = circleColor.b - 10;
-	if(circleColor.g<255) circleColor.g = circleColor.g + 10;
-	if(circleColor.g>255) circleColor.g = circleColor.g - 10;
-
-	drawCircle(dataArray, circleX, 20, 10, circleColor);
+	createGradient();
+	drawCircle(dataArray, circleX, 20, 10, gradColor);
 	circleX = circleX + 40;
 		}
 	
