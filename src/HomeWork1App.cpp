@@ -106,14 +106,26 @@ void HomeWork1App::blur(uint8_t* pixels){
 	
 	for(int col = 0; col<800; col++){
 		for(int row = 0;  row<600; row++){
-			if(col < 792){
+
+			//First eight in a row need to be handled differently
+			if(col<9){
 				for(int n = 0; n<8; n++){
 					pixels[3*(col + row*kTextureSize)] = pixels[3*(col + row*kTextureSize)] + pixels[3*((col+n) + row*kTextureSize)];
 					pixels[3*(col + row*kTextureSize)+1] = pixels[3*(col + row*kTextureSize)+1] + pixels[3*((col+n)  + row*kTextureSize)+1];
 					pixels[3*(col + row*kTextureSize)+2] =  pixels[3*(col + row*kTextureSize)+2] + pixels[3*((col+n) + row*kTextureSize)+2];
 				}
-				}
+				
+			}
 
+			//
+			if(col < 792 & col > 9){
+				for(int n = 0; n<4; n++){
+					pixels[3*(col + row*kTextureSize)] = pixels[3*(col + row*kTextureSize)] + pixels[3*((col+n) + row*kTextureSize)]+ pixels[3*((col-n) + row*kTextureSize)];
+					pixels[3*(col + row*kTextureSize)+1] = pixels[3*(col + row*kTextureSize)+1] + pixels[3*((col+n)  + row*kTextureSize)+1]+ pixels[3*((col-n)  + row*kTextureSize)+1];
+					pixels[3*(col + row*kTextureSize)+2] =  pixels[3*(col + row*kTextureSize)+2] + pixels[3*((col+n) + row*kTextureSize)+2] + pixels[3*((col-n) + row*kTextureSize)+2];
+				}
+				}
+			//Last eight pixels in a row need to be handled differently
 				if(col>792){
 				for(int n = 8; n>0; n--){
 					pixels[3*(col + row*kTextureSize)] = pixels[3*(col + row*kTextureSize)] + pixels[3*((col-n) + row*kTextureSize)];
@@ -145,7 +157,7 @@ void HomeWork1App::mouseDown( MouseEvent event )
 {
 	//Get our array of pixel information
 	uint8_t* dataArray = (*mySurface_).getData();
-	tint(dataArray);
+	//tint(dataArray);
 	blur(dataArray);
 	
 }
