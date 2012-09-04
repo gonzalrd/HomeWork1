@@ -131,7 +131,7 @@ void HomeWork1App::blur(uint8_t* pixels){
 				
 			}
 
-			//
+			//Pixels in the rest of the images
 			if((col < 792) & (col > 9)){
 				for(int n = 0; n<8; n++){
 					pixels[3*(col + row*kTextureSize)] = pixels[3*(col + row*kTextureSize)] + pixels[3*((col+n) + row*kTextureSize)]+ pixels[3*((col-n) + row*kTextureSize)];
@@ -148,9 +148,9 @@ void HomeWork1App::blur(uint8_t* pixels){
 				}
 				
 			}
-				    pixels[3*(col + row*kTextureSize)] =  pixels[3*(col + row*kTextureSize)]/8;
-					pixels[3*(col + row*kTextureSize)+1] = pixels[3*(col + row*kTextureSize)+1]/8;
-					pixels[3*(col + row*kTextureSize)+2] =  pixels[3*(col + row*kTextureSize)+2]/8;
+				    pixels[3*(col + row*kTextureSize)] =  pixels[3*(col + row*kTextureSize)]/9;
+					//pixels[3*(col + row*kTextureSize)+1] = pixels[3*(col + row*kTextureSize)+1]/9;
+					//pixels[3*(col + row*kTextureSize)+2] =  pixels[3*(col + row*kTextureSize)+2]/9;
 
 		}
 	}
