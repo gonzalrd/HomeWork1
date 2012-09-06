@@ -61,7 +61,7 @@ void HomeWork1App::prepareSettings(Settings* settings){
 
 //Draws the rectangles for the rectangle requirement.
 void HomeWork1App::drawRectangles(uint8_t* pixels, int x1, int y1, int rect_width, int rect_height, Color8u c){
-	// cut out the object intermediate since you can just access the color directly
+	// cut out the object intermediate since you can just access the color directly - Nick
 
 	for(int x = x1; x<rect_height; x++){
 		for(int y = y1; y<rect_width; y++){
@@ -79,7 +79,7 @@ void HomeWork1App::drawCircle(uint8_t* pixels, int center_x, int center_y, int r
 		for(int x=center_x-r; x<=center_x+r; x++){
 			//Bounds test, to make sure we don't access array out of bounds
 			if(y < 0 || x < 0 || x >= kAppWidth || y >= kAppHeight) continue;
-			// ^that's a nice idea that I wish I had thought to implement XD;;
+			// ^that's a nice idea that I wish I had thought to implement XD;; - Nick
 					
 			int dist = (int)sqrt((double)((x-center_x)*(x-center_x) + (y-center_y)*(y-center_y)));
 			if(dist <= r){
@@ -104,8 +104,8 @@ void HomeWork1App::createGradient(){
 }
 //Takes in the array of pixels and sets the blue color in each one to change the color
 void HomeWork1App::tint(uint8_t* pixels){
-	// an off-by-one error was mixing up the g and b values. the function should be working as intended now.
-	Color8u c = Color8u(0,0,100); // was originally setting b = 0. 
+	// an off-by-one error was mixing up the g and b values. the function should be working as intended now. - Nick
+	Color8u c = Color8u(0,0,100); // was originally setting b = 0. - Nick
 	for(int col = 0; col<800; col++){
 		for(int row = 0;  row<600; row++){
 			pixels[3*(col + row*kTextureSize)+2] = c.b;
@@ -115,13 +115,13 @@ void HomeWork1App::tint(uint8_t* pixels){
 
 //applies the blur for the blur requirement.
 void HomeWork1App::blur(uint8_t* pixels){
-	// changed it so that the size of the frame could be changed without any problems if someone wanted
+	// changed it so that the size of the frame could be changed without any problems if someone wanted - Nick
 	for(int col = 2; col<(kAppWidth-1); col++){
 		for(int row = 2;  row<(kAppHeight-1); row++){
 	
 				for (int i = 0; i < 3; i++){ 
 					// put the math in one for loop for readability
-					// also spaced out the equation so it can all be seen at once.
+					// also spaced out the equation so it can all be seen at once. - Nick
 					pixels[3*(col + row*kTextureSize)+i] = (pixels[3*(col + row*kTextureSize)+i] + 
 						pixels[3*((col+1) + row*kTextureSize)+i] + 
 						pixels[3*((col+1) + (row+1)*kTextureSize)+i] + 
