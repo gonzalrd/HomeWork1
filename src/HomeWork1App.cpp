@@ -34,10 +34,10 @@ class HomeWork1App : public AppBasic {
 	static const int kAppHeight=600;
 	static const int kTextureSize=1024; //Must be the next power of 2 bigger or equal to app dimensions
 
-	/** This satisfies the "rectangle" requirement, goal A.1
+	/** This satisfies the "rectangle" requirement, goal A.1- Got from Brinkman HW01
 	 */
 	void drawRectangles(uint8_t* pixels, int x1, int y1,  int rect_width, int rect_height, Color8u c);
-	/** Satisfies the circle requiremtn goal A.2 
+	/** Satisfies the circle requiremtn goal A.2 - Got from Brinkman HW01
 	*/
 	void drawCircle(uint8_t* pixels, int center_x, int center_y, int r, Color8u c);
 	/*Satifies the gradient requiremnt goal A.4
